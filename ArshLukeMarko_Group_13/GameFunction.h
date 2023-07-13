@@ -4,3 +4,11 @@
 #include <stdbool.h>
 #include <string.h>
 #include <time.h>
+
+typedef struct monstStat {
+	double hitpoints;
+	double attack;
+	double defense;
+	int speed;
+	bool isAlive;
+} MONSTSTAT;
