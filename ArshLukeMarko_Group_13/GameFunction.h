@@ -4,11 +4,13 @@
 #include <stdbool.h>
 #include <string.h>
 #include <time.h>
+#include <math.h>
+#define NUMBEROFOPPONENTS 4
 #define MONSTER_COUNT 8
-#define FILENAME "stats"
 
 typedef struct monstStat {
-	double hitpoints;
+	double HP;
+	double maxHP;
 	double attack;
 	double defence;
 } MONSTSTAT;
@@ -25,4 +27,8 @@ void printTy(bool);
 void printJared(bool);
 void printPorkchop(bool);
 
-MONSTSTAT readMonsterFromFile(FILE* fp);
+double attackDamage(MONSTSTAT, MONSTSTAT);
+
+void delay(int);
+
+void printBattleState(MONSTSTAT, MONSTSTAT, int, int);
