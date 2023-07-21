@@ -6,11 +6,10 @@
 #include <time.h>
 
 typedef struct monstStat {
-	double hitpoints;
+	double HP;
+	double maxHP;
 	double attack;
-	double defense;
-	int speed;
-	bool isAlive;
+	double defence
 } MONSTSTAT;
 
 void game();
