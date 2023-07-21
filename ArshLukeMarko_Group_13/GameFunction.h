@@ -12,3 +12,5 @@ typedef struct monstStat {
 	int speed;
 	bool isAlive;
 } MONSTSTAT;
+
+void game();
