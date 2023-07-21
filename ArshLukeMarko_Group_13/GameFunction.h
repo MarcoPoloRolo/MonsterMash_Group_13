@@ -13,3 +13,8 @@ typedef struct monstStat {
 } MONSTSTAT;
 
 void game();
+
+char* setUsername() {
+	printf("Enter username: \n");
+
+}
