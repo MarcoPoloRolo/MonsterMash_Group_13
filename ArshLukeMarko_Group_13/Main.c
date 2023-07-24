@@ -4,25 +4,34 @@
 
 int main()
 {
-	
-
 	//Creates array for trophy list and initializes from file
 	int trophies[NUMBER_OF_OPPONENTS] = { 0 };
 	FILE* fp2 = fopen("trophies", "r");
 	for (int i = 0; i < NUMBER_OF_OPPONENTS; i++)
 		fscanf_s(fp2, "%d\n", &trophies[i]);
 	fclose(fp2);
-
-	int player = 2; //Players monster choice (0-3), currently hardcoded
-	int opponent = 7; //opponents monsters (4-7)
-
-	//Battle start
+	
+	//Battle setup -----------------------------------------------------------------------------------------------
 	MONSTSTAT monsters[MONSTER_COUNT] = { 0 }; //Creates array and initializes values from read only file
 	FILE* fp1 = fopen("stats", "r");
 	for (int i = 0; i < MONSTER_COUNT; i++)
 		fscanf_s(fp1, "%lf\n%lf\n%lf\n%lf\n", &monsters[i].maxHP, &monsters[i].HP, &monsters[i].attack, &monsters[i].defence);
 	fclose(fp1);
+
+	int player = 2; //Players monster choice (0-3), currently hardcoded
+	int opponent = 7; //opponents monsters (4-7)
+
 	int menuChoice;
+	double difficultyMultiplier;
+	printf("Select difficulty:\n1. Easy\n2. Normal\n3. Hard\n");
+	if (scanf("%d", &menuChoice))
+	{
+		difficultyMultiplier = ((double)menuChoice / 5) + 0.6; //Either 0.8x, 1x, or 1.2x;
+		monsters[opponent].attack = monsters[opponent].attack * difficultyMultiplier;
+		monsters[opponent].defence = monsters[opponent].defence * difficultyMultiplier;
+	} //Makes opponent's stats harder or easier depending on difficulty choice
+
+	//Battle start -----------------------------------------------------------------------------------------------
 	double damage;
 	srand(time(NULL));
 	while (monsters[player].HP > 0 && monsters[opponent].HP > 0) //Battle starts
