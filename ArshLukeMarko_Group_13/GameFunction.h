@@ -5,12 +5,13 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
-#define NUMBEROFOPPONENTS 4
+#define DEFENCE_MULTIPLIER 0.8
+#define NUMBER_OF_OPPONENTS 4
 #define MONSTER_COUNT 8
 
 typedef struct monstStat {
-	double HP;
 	double maxHP;
+	double HP;
 	double attack;
 	double defence;
 } MONSTSTAT;
@@ -28,6 +29,7 @@ void printJared(bool);
 void printPorkchop(bool);
 
 double attackDamage(MONSTSTAT, MONSTSTAT);
+double specialDamage(MONSTSTAT, MONSTSTAT);
 
 void delay(int);
 

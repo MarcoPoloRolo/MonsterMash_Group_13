@@ -83,6 +83,13 @@ double attackDamage(MONSTSTAT attacker, MONSTSTAT defender)
 {
 	return((attacker.attack * defender.defence) + rand()%10);
 }
+double specialDamage(MONSTSTAT attacker, MONSTSTAT defender)
+{
+	if ((rand() % 10) + 1 <= 5) //50% chance of the attack hitting
+		return(((attacker.attack * defender.defence) + rand() % 10) * 2); //double the regular damage
+	else
+		return(((attacker.attack * defender.defence) + rand() % 10) / -2); //half the regular damage. Negative to signify it hits the player
+}
 
 void delay(int ms) //freezes the program for some number of milliseconds
 {
@@ -92,48 +99,54 @@ void delay(int ms) //freezes the program for some number of milliseconds
 
 void printBattleState(MONSTSTAT player, MONSTSTAT opponent, int p ,  int o) //displays the current state to the player
 {
-	printf("\nOpponent's HP: %d / %d", (int)ceil(opponent.HP), (int)ceil(opponent.maxHP));
+	system("@cls||clear");
 	//print enemy
-	bool opponentIsAlive;
-	if (opponent.HP > 0)
-		opponentIsAlive = true;
+	if (opponent.HP >= 0)
+		printf("\nOpponent's HP: %d / %d", (int)ceil(opponent.HP), (int)ceil(opponent.maxHP));
 	else
-		opponentIsAlive = false;
+		printf("\nOpponent's HP: 0 / %d", (int)ceil(opponent.maxHP));
+	bool monsterIsAlive;
+	if (opponent.HP > 0)
+		monsterIsAlive = true;
+	else
+		monsterIsAlive = false;
 	switch (o)
 	{
 	case 4:
-		printChomp(opponentIsAlive);
+		printChomp(monsterIsAlive);
 		break;
 	case 5:
-		printTy(opponentIsAlive);
+		printTy(monsterIsAlive);
 		break;
 	case 6:
-		printJared(opponentIsAlive);
+		printJared(monsterIsAlive);
 		break;
 	case 7:
-		printPorkchop(opponentIsAlive);
+		printPorkchop(monsterIsAlive);
 		break;
 	}
 	//print player
-	bool playerIsAlive;
 	if (player.HP > 0)
-		playerIsAlive = true;
+		monsterIsAlive = true;
 	else
-		playerIsAlive = false;
+		monsterIsAlive = false;
 	switch (p)
 	{
 	case 0:
-		printNibbles(playerIsAlive);
+		printNibbles(monsterIsAlive);
 		break;
 	case 1:
-		printFelix(playerIsAlive);
+		printFelix(monsterIsAlive);
 		break;
 	case 2:
-		printPip(playerIsAlive);
+		printPip(monsterIsAlive);
 		break;
 	case 3:
-		printBaconBoi(playerIsAlive);
+		printBaconBoi(monsterIsAlive);
 		break;
 	}	
-	printf("Your HP: %d / %d\n", (int)ceil(player.HP), (int)ceil(player.maxHP));
+	if (player.HP >=0)
+		printf("Your HP: %d / %d\n\n", (int)ceil(player.HP), (int)ceil(player.maxHP));
+	else
+		printf("Your HP: 0 / %d\n\n", (int)ceil(player.maxHP));
 }
