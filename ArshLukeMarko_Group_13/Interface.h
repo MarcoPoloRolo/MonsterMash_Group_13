@@ -4,3 +4,5 @@
 #include <stdbool.h>
 
 int mainMenu(void);
+int difficultySelection(void);
+int monsterSelection(void);

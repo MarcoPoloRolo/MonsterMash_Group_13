@@ -7,45 +7,56 @@ int main()
 {
 	//Creates array for trophy list and initializes values from file
 	int trophies[NUMBER_OF_OPPONENTS] = { 0 };
-	FILE* fp2 = fopen("trophies", "r");
+	FILE* fp1 = fopen("trophies", "r");
 	for (int i = 0; i < NUMBER_OF_OPPONENTS; i++)
-		fscanf_s(fp2, "%d\n", &trophies[i]);
-	fclose(fp2);
-	
-	//Creates array for monsters and initializes values from read only file
-	MONSTSTAT monsters[MONSTER_COUNT] = { 0 }; 
-	FILE* fp1 = fopen("stats", "r");
-	for (int i = 0; i < MONSTER_COUNT; i++)
-		fscanf_s(fp1, "%lf\n%lf\n%lf\n%lf\n", &monsters[i].maxHP, &monsters[i].HP, &monsters[i].attack, &monsters[i].defence);
+		fscanf_s(fp1, "%d\n", &trophies[i]);
 	fclose(fp1);
+	
+	//Creates array for monsters
+	MONSTSTAT monsters[MONSTER_COUNT] = { 0 }; 	
 
-	//Start game
+	//Start game loop
+	int difficulty;
 	bool continueGame = true;
 	do
 	{
-		switch (mainMenu()) //Get main menu input and proceed to the next menu
+		//Reset all monster values before each battle starts
+		FILE* fp2 = fopen("stats", "r");
+		for (int i = 0; i < MONSTER_COUNT; i++)
+			fscanf_s(fp2, "%lf\n%lf\n%lf\n%lf\n", &monsters[i].maxHP, &monsters[i].HP, &monsters[i].attack, &monsters[i].defence);
+		fclose(fp2);
+
+		//Get main menu input and proceed to the next menu
+		switch (mainMenu())
 		{
-		case 1:
-			//get difficulty level then start the battle
-			printf("unfinished");
+		case 1: //Get difficulty/monster then start the battle
+			difficulty = difficultySelection();
+			int monsterChoice = monsterSelection() - 1;
+			int opponentMonster = rand() % 4;
+			printBattleIntro();
+			bool playerWon = battleStart(monsters[monsterChoice], monsters[opponentMonster], monsterChoice, opponentMonster + 4, (difficulty / 5) + 0.6);
+			//Assigning new trophies
+			if (playerWon && trophies[monsterChoice] < difficulty) //If you haven't already beaten a harder monster...
+				trophies[monsterChoice] = difficulty;
 			break;
-		case 2:
-			printTrophyRoom(trophies);
+
+		case 2: //Display trophy room
+			printTrophies(trophies);
 			break;
-		case 3:
-			printf("Exiting the game...\n");
+
+		case 3: //Exit
+			printf("\nThanks for playing!\n");
 			continueGame = false;
 			break;
 		}
 	} while (continueGame == true);
 
-	/*int player = 2; //Players monster choice (0-3), currently hardcoded
-	int opponent = 7; //opponents monsters (4-7)
-
-	int menuChoice;
-	printf("Select difficulty:\n1. Easy\n2. Normal\n3. Hard\n");
-	scanf("%d", &menuChoice);
-	double difficultyMultiplier = ((double)menuChoice / 5) + 0.6;
-	printf("%lf", difficultyMultiplier);*/
+	//End game
+	FILE* fp3 = fopen("trophies", "w"); // Overwrites previous file
+	for (int i = 0; i < NUMBER_OF_OPPONENTS; i++)
+	{
+		fprintf(fp3, "%d\n", trophies[i]); // Writes updated information into file
+	}
+	fclose(fp3);
 	return 0;
 }

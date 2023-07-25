@@ -14,7 +14,7 @@ void printNibbles(bool status)
 }
 void printFelix(bool status)
 {
-	printf("\n/\\__/\\\n");
+	printf("\n /\\_/\\\n");
 	if (status == true)
 		printf("(=^.^=)\n");
 	else
@@ -52,7 +52,7 @@ void printChomp(bool status)
 }
 void printTy(bool status)
 {
-	printf("\n		/\\__/\\\n");
+	printf("\n		 /\\_/\\\n");
 	if (status == true)
 		printf("		(=0_0=)\n");
 	else
@@ -133,28 +133,29 @@ void printBattleState(MONSTSTAT player, MONSTSTAT opponent, int p, int o) //disp
 		printf("Your HP: 0 / %d\n\n", (int)ceil(player.maxHP));
 }
 
-void printTrophyRoom(int t[])
+void printTrophies(int t[])
 {
 	system("@cls||clear");
-	printf("=============== Trophies ===============\n");
-	printf("\n   Chomp. Highest difficulty beaten: ");
+	printf("=============== Trophies ================\n");
+	printf("\n Chomp - Highest difficulty beaten: ");
 	printDifficulty(t[0]);
 	printChomp(false);
-	printf("\n      Ty. Highest difficulty beaten: ");
+	printf("\n  Ty - Highest difficulty beaten: ");
 	printDifficulty(t[1]);
 	printTy(false);
-	printf("\n   Jared. Highest difficulty beaten: ");
+	printf("\n Jared - Highest difficulty beaten: ");
 	printDifficulty(t[2]);
 	printJared(false);
-	printf("\nPorkchop. Highest difficulty beaten: ");
+	printf("\nPorkchop - Highest difficulty beaten: ");
 	printDifficulty(t[3]);
 	printPorkchop(false);
-	printf("\n\nPress enter to go back. (not currently working. Just wait a few seconds)\n");
-	delay(5000); //This will be replaced with "press any key to go back"
+	printf("\n\nPress any key to go back: ");
+	char c;
+	c = _getch(); //Waits for a single keypress from the user, then goes back to main()
 	system("@cls||clear");
 }
 
-void printDifficulty(int i)
+void printDifficulty(int i) //Only used by printTrophies function
 {
 	if (i == 0)
 		printf("None");
@@ -164,4 +165,23 @@ void printDifficulty(int i)
 		printf("Normal");
 	else
 		printf("Hard");
+}
+
+void printBattleIntro()
+{ //Countdown to add tension
+	printf("\nBattle starting in ");
+	for (int i = 3; i > 0; i--)
+	{
+		printf("%d, ", i);	
+		delay(DELAY_TIME);
+	}
+}
+
+void delayBetweenTurns()
+{
+	for (int i = 0; i < 5; i++)
+	{
+		delay(DELAY_TIME);
+		printf(".");
+	}
 }

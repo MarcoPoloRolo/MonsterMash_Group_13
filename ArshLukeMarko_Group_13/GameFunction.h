@@ -23,4 +23,4 @@ double specialDamage(MONSTSTAT, MONSTSTAT);
 
 void delay(int);
 
-void battleStart(MONSTSTAT, MONSTSTAT, int, int, double);
+bool battleStart(MONSTSTAT, MONSTSTAT, int, int, double);

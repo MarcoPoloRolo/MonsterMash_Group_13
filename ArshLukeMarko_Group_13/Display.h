@@ -1,6 +1,8 @@
 #pragma once
+#include "GameFunction.h"
 #include <stdbool.h>
 #include <stdio.h>
+#include <conio.h>
 
 //Print monster functions
 //Players
@@ -16,6 +18,10 @@ void printPorkchop(bool);
 
 void printBattleState(MONSTSTAT, MONSTSTAT, int, int);
 
-void printTrophyRoom(int[]);
+void printTrophies(int[]);
 
 void printDifficulty(int);
+
+void printBattleIntro();
+
+void delayBetweenTurns();

@@ -1,4 +1,5 @@
 #include "GameFunction.h"
+#include "Display.h"
 
 double attackDamage(MONSTSTAT attacker, MONSTSTAT defender)
 {
@@ -18,7 +19,7 @@ void delay(int ms) //freezes the program for some number of milliseconds
 	while (clock() < start_time + ms);
 }
 
-void battleStart(MONSTSTAT player, MONSTSTAT opponent, int p, int o, double d)
+bool battleStart(MONSTSTAT player, MONSTSTAT opponent, int p, int o, double d)
 {
 	//Setup
 	opponent.attack = opponent.attack * d;
@@ -68,19 +69,15 @@ void battleStart(MONSTSTAT player, MONSTSTAT opponent, int p, int o, double d)
 		if (player.HP > 0 && opponent.HP > 0)
 		{
 			printf("\nOpponent's turn");
-			for (int i = 0; i < 5; i++)
-			{
-				delay(DELAY_TIME);
-				printf(".");
-			}
+			delayBetweenTurns(); //Waits a few seconds before clearing screen for opponent's turn
 			moveChoice = rand() % 3 + 1; //randomly select move
-			switch (moveChoice) //logic for player's move choice
+			switch (moveChoice)
 			{
 			case 1: //Basic attack
 				damage = attackDamage(opponent, player);
 				player.HP = player.HP - damage;
 				printBattleState(player, opponent, p, o);
-				printf("Your opponent attacked you for %.1lf damage.", damage);
+				printf("Your opponent attacked you for %.1lf damage", damage);
 				break;
 			case 2: //Defence 
 				player.defence = opponent.defence * DEFENCE_MULTIPLIER;
@@ -100,15 +97,24 @@ void battleStart(MONSTSTAT player, MONSTSTAT opponent, int p, int o, double d)
 					printf("Your opponents attack backfired! It dealt %.1lf damage to itself!", -damage);
 				break;
 			}
-			for (int i = 0; i < 5; i++)
-			{
-				printf(".");
-				delay(DELAY_TIME);
-			}
+			if (player.HP > 0 && opponent.HP > 0)
+				delayBetweenTurns(); //Delay won't happen if battle is over
 		}
 	}
 	if (player.HP <= 0) //end game logic, with trophies
+	{
 		printf("\nBattle over. You lost.\n");
+		printf("\nPress any key to continue: ");
+		char c;
+		c = _getch();
+		return(false);
+	}
 	else
+	{
 		printf("\nBattle over. You won!\n");
+		printf("\nPress any key to continue: ");
+		char c;
+		c = _getch();
+		return(true);
+	}
 }
