@@ -1,4 +1,5 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -8,6 +9,7 @@
 #define DEFENCE_MULTIPLIER 0.8
 #define NUMBER_OF_OPPONENTS 4
 #define MONSTER_COUNT 8
+#define DELAY_TIME 600
 
 typedef struct monstStat {
 	double maxHP;
@@ -16,21 +18,9 @@ typedef struct monstStat {
 	double defence;
 } MONSTSTAT;
 
-//Print monster functions
-//Players
-void printNibbles(bool);
-void printFelix(bool);
-void printPip(bool);
-void printBaconBoi(bool);
-//Opponents
-void printChomp(bool);
-void printTy(bool);
-void printJared(bool);
-void printPorkchop(bool);
-
 double attackDamage(MONSTSTAT, MONSTSTAT);
 double specialDamage(MONSTSTAT, MONSTSTAT);
 
 void delay(int);
 
-void printBattleState(MONSTSTAT, MONSTSTAT, int, int);
+void battleStart(MONSTSTAT, MONSTSTAT, int, int, double);
