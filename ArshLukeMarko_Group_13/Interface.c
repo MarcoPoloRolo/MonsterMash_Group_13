@@ -6,7 +6,7 @@ int mainMenu() {
     bool validInput = true;
     printf("======= Welcome to the Monster Mash =======\n\n");
     do {
-        printf("Please select an option:\n");
+        printf("Please select an option:\n"); //Present options
         printf("1. Play Game\n");
         printf("2. Check Trophies\n");
         printf("3. Exit\n");

@@ -15,3 +15,7 @@ void printJared(bool);
 void printPorkchop(bool);
 
 void printBattleState(MONSTSTAT, MONSTSTAT, int, int);
+
+void printTrophyRoom(int[]);
+
+void printDifficulty(int);

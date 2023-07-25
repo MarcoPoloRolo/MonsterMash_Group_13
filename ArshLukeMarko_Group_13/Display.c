@@ -132,3 +132,36 @@ void printBattleState(MONSTSTAT player, MONSTSTAT opponent, int p, int o) //disp
 	else
 		printf("Your HP: 0 / %d\n\n", (int)ceil(player.maxHP));
 }
+
+void printTrophyRoom(int t[])
+{
+	system("@cls||clear");
+	printf("=============== Trophies ===============\n");
+	printf("\n   Chomp. Highest difficulty beaten: ");
+	printDifficulty(t[0]);
+	printChomp(false);
+	printf("\n      Ty. Highest difficulty beaten: ");
+	printDifficulty(t[1]);
+	printTy(false);
+	printf("\n   Jared. Highest difficulty beaten: ");
+	printDifficulty(t[2]);
+	printJared(false);
+	printf("\nPorkchop. Highest difficulty beaten: ");
+	printDifficulty(t[3]);
+	printPorkchop(false);
+	printf("\n\nPress enter to go back. (not currently working. Just wait a few seconds)\n");
+	delay(5000); //This will be replaced with "press any key to go back"
+	system("@cls||clear");
+}
+
+void printDifficulty(int i)
+{
+	if (i == 0)
+		printf("None");
+	else if (i == 1)
+		printf("Easy");
+	else if (i == 2)
+		printf("Normal");
+	else
+		printf("Hard");
+}

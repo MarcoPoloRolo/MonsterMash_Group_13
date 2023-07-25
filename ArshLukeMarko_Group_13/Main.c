@@ -20,15 +20,24 @@ int main()
 	fclose(fp1);
 
 	//Start game
-	switch (mainMenu()) //Get main menu input and proceed to the next menu
+	bool continueGame = true;
+	do
 	{
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
-	}
+		switch (mainMenu()) //Get main menu input and proceed to the next menu
+		{
+		case 1:
+			//get difficulty level then start the battle
+			printf("unfinished");
+			break;
+		case 2:
+			printTrophyRoom(trophies);
+			break;
+		case 3:
+			printf("Exiting the game...\n");
+			continueGame = false;
+			break;
+		}
+	} while (continueGame == true);
 
 	/*int player = 2; //Players monster choice (0-3), currently hardcoded
 	int opponent = 7; //opponents monsters (4-7)
@@ -37,9 +46,6 @@ int main()
 	printf("Select difficulty:\n1. Easy\n2. Normal\n3. Hard\n");
 	scanf("%d", &menuChoice);
 	double difficultyMultiplier = ((double)menuChoice / 5) + 0.6;
-	printf("%lf", difficultyMultiplier);
-
-	battleStart(monsters[player], monsters[opponent], player, opponent, difficultyMultiplier); //Run a single battle
-	*/
+	printf("%lf", difficultyMultiplier);*/
 	return 0;
 }
