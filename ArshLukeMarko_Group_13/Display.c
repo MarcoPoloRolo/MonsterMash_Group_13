@@ -185,3 +185,30 @@ void delayBetweenTurns()
 		printf(".");
 	}
 }
+
+void printBattleEnd(bool playerWon)
+{
+	if (playerWon)
+	{
+		printf("\n\nBattle over. You won!\n");
+		int r = rand() % 10;
+		if (r == 0)
+			printf("\nCheat code unlocked: 39772");
+		else if (r == 1)
+			printf("\nCheat code unlocked: 82650");
+		else if (r == 2)
+			printf("\nCheat code unlocked : 21567");
+		else if (r == 3)
+			printf("\nCheat code unlocked: 91659");
+		printf("\n\nPress any key to continue: ");
+		char c;
+		c = _getch();
+	}
+	else
+	{
+		printf("\n\nBattle over. You lost.");
+		printf("\n\nPress any key to continue: ");
+		char c;
+		c = _getch();
+	}
+}

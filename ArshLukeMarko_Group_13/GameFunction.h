@@ -6,7 +6,7 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
-#define DEFENCE_MULTIPLIER 0.8
+#define DEFENCE_MULTIPLIER 0.85
 #define NUMBER_OF_OPPONENTS 4
 #define MONSTER_COUNT 8
 #define DELAY_TIME 600

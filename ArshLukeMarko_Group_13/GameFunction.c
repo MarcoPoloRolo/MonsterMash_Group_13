@@ -46,7 +46,7 @@ bool battleStart(MONSTSTAT player, MONSTSTAT opponent, int p, int o, double d)
 			case 2: //Defence 
 				player.defence = player.defence * DEFENCE_MULTIPLIER;
 				printBattleState(player, opponent, p, o);
-				printf("Defence increased by 20%%\n");
+				printf("Defence increased by 15%%\n");
 				break;
 			case 3: //Special move
 				damage = specialDamage(player, opponent);
@@ -82,7 +82,7 @@ bool battleStart(MONSTSTAT player, MONSTSTAT opponent, int p, int o, double d)
 			case 2: //Defence 
 				player.defence = opponent.defence * DEFENCE_MULTIPLIER;
 				printBattleState(player, opponent, p, o);
-				printf("Opponent's defence increased by 20%%");
+				printf("Opponent's defence increased by 15%%");
 				break;
 			case 3: //Special move
 				damage = specialDamage(opponent, player);
@@ -101,20 +101,14 @@ bool battleStart(MONSTSTAT player, MONSTSTAT opponent, int p, int o, double d)
 				delayBetweenTurns(); //Delay won't happen if battle is over
 		}
 	}
-	if (player.HP <= 0) //end game logic, with trophies
+	if (player.HP <= 0)
 	{
-		printf("\nBattle over. You lost.\n");
-		printf("\nPress any key to continue: ");
-		char c;
-		c = _getch();
+		printBattleEnd(false);
 		return(false);
 	}
 	else
 	{
-		printf("\nBattle over. You won!\n");
-		printf("\nPress any key to continue: ");
-		char c;
-		c = _getch();
+		printBattleEnd(true);
 		return(true);
 	}
 }

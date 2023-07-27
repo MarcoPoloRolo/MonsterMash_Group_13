@@ -25,3 +25,5 @@ void printDifficulty(int);
 void printBattleIntro();
 
 void delayBetweenTurns();
+
+void printBattleEnd(bool);

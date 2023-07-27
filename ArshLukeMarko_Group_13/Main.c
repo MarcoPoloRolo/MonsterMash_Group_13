@@ -1,3 +1,5 @@
+//CSCN71030 - Group 13: Arsh Chauhan, Luke Bolhous, Marko Cvetkovic - Summer 2023 - Group assignment: Monster Mash
+
 #define _CRT_SECURE_NO_WARNINGS
 #include "GameFunction.h"
 #include "Interface.h"
