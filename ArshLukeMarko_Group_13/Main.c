@@ -32,10 +32,15 @@ int main()
 		switch (mainMenu())
 		{
 		case 1: //Get difficulty/monster then start the battle
+			soundEffect(L"menuSelection.wav");
 			difficulty = difficultySelection();
+			soundEffect(L"menuSelection.wav");
 			int monsterChoice = monsterSelection() - 1;
+			soundEffect(L"menuSelection.wav");
 			int opponentMonster = rand() % 4;
 			printBattleIntro();
+			printBattleState(monsters[monsterChoice], monsters[opponentMonster], monsterChoice, opponentMonster + 4); //print battle state
+			soundEffect(L"battleStart.wav");
 			bool playerWon = battleStart(monsters[monsterChoice], monsters[opponentMonster], monsterChoice, opponentMonster + 4, (difficulty / 5) + 0.6);
 			//Assigning new trophies
 			if (playerWon && trophies[monsterChoice] < difficulty) //If you haven't already beaten a harder monster...
@@ -43,10 +48,12 @@ int main()
 			break;
 
 		case 2: //Display trophy room
+			soundEffect(L"menuSelection.wav");
 			printTrophies(trophies);
 			break;
 
 		case 3: //Exit
+			soundEffect(L"gameExit.wav");
 			printf("\nThanks for playing!\n");
 			continueGame = false;
 			break;

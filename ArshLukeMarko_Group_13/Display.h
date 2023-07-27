@@ -27,3 +27,5 @@ void printBattleIntro();
 void delayBetweenTurns();
 
 void printBattleEnd(bool);
+
+void soundEffect(const wchar_t* pszSound);

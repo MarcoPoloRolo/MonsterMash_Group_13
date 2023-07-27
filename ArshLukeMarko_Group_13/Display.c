@@ -1,5 +1,6 @@
 #include "GameFunction.h"
 #include "Display.h"
+#include <Windows.h>
 
 //Print Monsters
 //Players
@@ -152,6 +153,7 @@ void printTrophies(int t[])
 	printf("\n\nPress any key to go back: ");
 	char c;
 	c = _getch(); //Waits for a single keypress from the user, then goes back to main()
+	soundEffect(L"menuSelection.wav");
 	system("@cls||clear");
 }
 
@@ -190,6 +192,7 @@ void printBattleEnd(bool playerWon)
 {
 	if (playerWon)
 	{
+		soundEffect(L"winningFanfare.wav");
 		printf("\n\nBattle over. You won!\n");
 		int r = rand() % 10;
 		if (r == 0)
@@ -203,12 +206,19 @@ void printBattleEnd(bool playerWon)
 		printf("\n\nPress any key to continue: ");
 		char c;
 		c = _getch();
+		soundEffect(L"menuSelection.wav");
 	}
 	else
 	{
+		soundEffect(L"battleLost.wav");
 		printf("\n\nBattle over. You lost.");
 		printf("\n\nPress any key to continue: ");
 		char c;
 		c = _getch();
+		soundEffect(L"menuSelection.wav");
 	}
+}
+
+void soundEffect(const wchar_t* pszSound) {
+	PlaySound(pszSound, NULL, SND_FILENAME);
 }

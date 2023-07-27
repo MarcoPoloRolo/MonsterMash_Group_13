@@ -9,7 +9,7 @@
 #define DEFENCE_MULTIPLIER 0.85
 #define NUMBER_OF_OPPONENTS 4
 #define MONSTER_COUNT 8
-#define DELAY_TIME 600
+#define DELAY_TIME 500
 
 typedef struct monstStat {
 	double maxHP;

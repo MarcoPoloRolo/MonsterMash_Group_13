@@ -38,12 +38,14 @@ bool battleStart(MONSTSTAT player, MONSTSTAT opponent, int p, int o, double d)
 			switch (moveChoice) //move choice logic
 			{
 			case 1: //Basic attack
+				soundEffect(L"attack.wav");
 				damage = attackDamage(player, opponent);
 				opponent.HP = opponent.HP - damage;
 				printBattleState(player, opponent, p, o);
 				printf("You attacked your opponent for %.1lf damage.\n", damage);
 				break;
 			case 2: //Defence 
+				soundEffect(L"Defence.wav");
 				player.defence = player.defence * DEFENCE_MULTIPLIER;
 				printBattleState(player, opponent, p, o);
 				printf("Defence increased by 15%%\n");
@@ -54,11 +56,17 @@ bool battleStart(MONSTSTAT player, MONSTSTAT opponent, int p, int o, double d)
 					opponent.HP = opponent.HP - damage;
 				else
 					player.HP = player.HP + damage; //positive because damage is already negative in this case.
+					
 				printBattleState(player, opponent, p, o);
-				if (damage > 0)
+				if (damage > 0) {
+					soundEffect(L"critical.wav");
 					printf("Critical hit! You dealt %.1lf damage to your opponent!\n", damage);
-				else
+				}
+				else {
+					soundEffect(L"backfire.wav");
 					printf("It backfired! You dealt %.1lf damage to yourself!\n", -damage);
+				}
+					
 				break;
 			case 4: //Forfeit
 				player.HP = 0;
@@ -74,12 +82,14 @@ bool battleStart(MONSTSTAT player, MONSTSTAT opponent, int p, int o, double d)
 			switch (moveChoice)
 			{
 			case 1: //Basic attack
+				soundEffect(L"attack.wav");
 				damage = attackDamage(opponent, player);
 				player.HP = player.HP - damage;
 				printBattleState(player, opponent, p, o);
 				printf("Your opponent attacked you for %.1lf damage", damage);
 				break;
 			case 2: //Defence 
+				soundEffect(L"Defence.wav");
 				player.defence = opponent.defence * DEFENCE_MULTIPLIER;
 				printBattleState(player, opponent, p, o);
 				printf("Opponent's defence increased by 15%%");
@@ -91,10 +101,14 @@ bool battleStart(MONSTSTAT player, MONSTSTAT opponent, int p, int o, double d)
 				else
 					opponent.HP = opponent.HP + damage; //positive because damage is already negative in this case.
 				printBattleState(player, opponent, p, o);
-				if (damage > 0)
+				if (damage > 0) {
+					soundEffect(L"critical.wav");
 					printf("Critical hit! Your opponent dealt %.1lf damage to you!", damage);
-				else
+				}
+				else {
+					soundEffect(L"backfire.wav");
 					printf("Your opponents attack backfired! It dealt %.1lf damage to itself!", -damage);
+				}
 				break;
 			}
 			if (player.HP > 0 && opponent.HP > 0)
