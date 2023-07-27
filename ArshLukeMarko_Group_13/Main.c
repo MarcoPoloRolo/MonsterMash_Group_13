@@ -5,8 +5,12 @@
 #include "Interface.h"
 #include "Display.h"
 
-int main()
+int main(int argc, char* argv[])
 {
+	bool bossMode = false;
+	if (argc > 1 && strcmp(argv[1], "39772") == 0)
+		bossMode = true; //If code is entered, user has access to a secret boss
+
 	//Creates array for trophy list and initializes values from file
 	int trophies[NUMBER_OF_OPPONENTS] = { 0 };
 	FILE* fp1 = fopen("trophies", "r");
@@ -18,7 +22,7 @@ int main()
 	MONSTSTAT monsters[MONSTER_COUNT] = { 0 }; 	
 
 	//Start game loop
-	int difficulty;
+	int difficulty = 2; //Default is normal mode
 	bool continueGame = true;
 	do
 	{
@@ -33,18 +37,28 @@ int main()
 		{
 		case 1: //Get difficulty/monster then start the battle
 			soundEffect(L"menuSelection.wav");
-			difficulty = difficultySelection();
+			if (!bossMode)
+			{
+				difficulty = difficultySelection(); //Get desired difficulty
+				soundEffect(L"menuSelection.wav");
+			}
+			int monsterChoice = monsterSelection() - 1; //Get users monster
 			soundEffect(L"menuSelection.wav");
-			int monsterChoice = monsterSelection() - 1;
-			soundEffect(L"menuSelection.wav");
-			int opponentMonster = rand() % 4;
+			int opponentMonster;
+			if (bossMode)
+				opponentMonster = 4;
+			else
+				opponentMonster = rand() % 4;
 			printBattleIntro();
-			printBattleState(monsters[monsterChoice], monsters[opponentMonster], monsterChoice, opponentMonster + 4); //print battle state
-			soundEffect(L"battleStart.wav");
-			bool playerWon = battleStart(monsters[monsterChoice], monsters[opponentMonster], monsterChoice, opponentMonster + 4, (difficulty / 5) + 0.6);
+			printBattleState(monsters[monsterChoice], monsters[opponentMonster + 4], monsterChoice, opponentMonster + 4); //print battle state
+			if (bossMode)
+				soundEffect(L"bossFightStart.wav");
+			else
+				soundEffect(L"battleStart.wav");
+			bool playerWon = battleStart(monsters[monsterChoice], monsters[opponentMonster + 4], monsterChoice, opponentMonster + 4, ((double)difficulty / 5) + 0.6);
 			//Assigning new trophies
-			if (playerWon && trophies[monsterChoice] < difficulty) //If you haven't already beaten a harder monster...
-				trophies[monsterChoice] = difficulty;
+			if (playerWon && trophies[opponentMonster] < difficulty) //If you haven't already beaten a harder monster...
+				trophies[opponentMonster] = difficulty;
 			break;
 
 		case 2: //Display trophy room
@@ -53,14 +67,15 @@ int main()
 			break;
 
 		case 3: //Exit
-			soundEffect(L"gameExit.wav");
-			printf("\nThanks for playing!\n");
 			continueGame = false;
 			break;
 		}
 	} while (continueGame == true);
 
 	//End game
+	printf("\nThanks for playing!\n");
+	soundEffect(L"gameExit.wav");
+
 	FILE* fp3 = fopen("trophies", "w"); // Overwrites previous file
 	for (int i = 0; i < NUMBER_OF_OPPONENTS; i++)
 	{

@@ -1,6 +1,7 @@
 #pragma once
 #include "GameFunction.h"
 #include <stdbool.h>
+#include <Windows.h>
 #include <stdio.h>
 #include <conio.h>
 
@@ -15,17 +16,15 @@ void printChomp(bool);
 void printTy(bool);
 void printJared(bool);
 void printPorkchop(bool);
-
-void printBattleState(MONSTSTAT, MONSTSTAT, int, int);
+void printBoss(bool);
 
 void printTrophies(int[]);
-
 void printDifficulty(int);
 
+void printBattleState(MONSTSTAT, MONSTSTAT, int, int);
 void printBattleIntro();
-
 void delayBetweenTurns();
-
 void printBattleEnd(bool);
+void printHelpScreen();
 
 void soundEffect(const wchar_t* pszSound);

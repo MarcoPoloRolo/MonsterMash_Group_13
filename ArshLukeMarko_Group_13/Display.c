@@ -1,6 +1,5 @@
 #include "GameFunction.h"
 #include "Display.h"
-#include <Windows.h>
 
 //Print Monsters
 //Players
@@ -79,34 +78,114 @@ void printPorkchop(bool status)
 		printf("		( xox )\n");
 	printf("		( v v )\n");
 }
+void printBoss(bool status)
+{
+	printf("        <===_-----_===>   \n");
+	printf("        V  /  \\ /  \\  V   \n");
+	if (status == true)
+	{
+		printf("      <===|  O   O  |===> \n");
+		printf("      V   |   ===   |   V\n");
+	}
+	else
+	{
+		printf("      <===|  X   X  |===> \n");
+		printf("      V   |   ___   |   V\n");
+	}
+	printf("       <===\\       /===>  \n");
+	printf("       V    -------    V  \n");
+}
+
+void printTrophies(int t[])
+{
+	system("@cls||clear");
+	printf("=============== Trophies ================\n");
+	printf("\n Chomp - Highest difficulty beaten: ");
+	printDifficulty(t[0]);
+	printChomp(false);
+	printf("\n  Ty - Highest difficulty beaten: ");
+	printDifficulty(t[1]);
+	printTy(false);
+	printf("\n Jared - Highest difficulty beaten: ");
+	printDifficulty(t[2]);
+	printJared(false);
+	printf("\nPorkchop - Highest difficulty beaten: ");
+	printDifficulty(t[3]);
+	printPorkchop(false);
+	if (t[4] > 0)
+	{
+		printf("\nMagroth has been defeated!\n");
+		printBoss(false);
+	}
+	else
+		printf("\nMystery enemy... Not defeated yet");
+	printf("\n\nPress any key to go back: ");
+	char c;
+	c = _getch(); //Waits for a single keypress from the user, then goes back to main()
+	soundEffect(L"menuSelection.wav");
+	system("@cls||clear");
+}
+void printDifficulty(int i) //Only used by printTrophies function
+{
+	if (i == 0)
+		printf("None");
+	else if (i == 1)
+		printf("Easy");
+	else if (i == 2)
+		printf("Normal");
+	else
+		printf("Hard");
+}
 
 void printBattleState(MONSTSTAT player, MONSTSTAT opponent, int p, int o) //displays the current state to the player
 {
 	system("@cls||clear");
-	//print enemy
-	if (opponent.HP >= 0)
-		printf("\nOpponent's HP: %d / %d", (int)ceil(opponent.HP), (int)ceil(opponent.maxHP));
-	else
-		printf("\nOpponent's HP: 0 / %d", (int)ceil(opponent.maxHP));
 	bool monsterIsAlive;
-	if (opponent.HP > 0)
-		monsterIsAlive = true;
-	else
-		monsterIsAlive = false;
-	switch (o)
+	//print enemy
+	if (o == 8) //Boss is printed differently
 	{
-	case 4:
-		printChomp(monsterIsAlive);
-		break;
-	case 5:
-		printTy(monsterIsAlive);
-		break;
-	case 6:
-		printJared(monsterIsAlive);
-		break;
-	case 7:
-		printPorkchop(monsterIsAlive);
-		break;
+		//print healthbar
+		printf("            Magroth\n");
+		printf("================================\n");
+		printf("            Health:\n[");
+		for (int i = 0; i < ((int)(ceil(opponent.HP) / 10)); i++)
+			printf("|");
+		for (int i = ((int)(ceil(opponent.maxHP) / 10)); i > ((int)(ceil(opponent.HP) / 10)); i--)
+			printf(" ");
+		printf("]\n\n");
+		//print boss
+		if (opponent.HP > 0)
+			monsterIsAlive = true;
+		else
+			monsterIsAlive = false;
+		printBoss(monsterIsAlive);
+		printf("\n");
+	}
+	else //Regular enemy
+	{
+		if (opponent.HP >= 0)
+			printf("\nOpponent's HP: %d / %d", (int)ceil(opponent.HP), (int)ceil(opponent.maxHP));
+		else
+			printf("\nOpponent's HP: 0 / %d", (int)ceil(opponent.maxHP));
+		if (opponent.HP > 0)
+			monsterIsAlive = true;
+		else
+			monsterIsAlive = false;
+		switch (o)
+		{
+		case 4:
+			printChomp(monsterIsAlive);
+			break;
+		case 5:
+			printTy(monsterIsAlive);
+			break;
+		case 6:
+			printJared(monsterIsAlive);
+			break;
+		case 7:
+			printPorkchop(monsterIsAlive);
+			break;
+		}
 	}
 	//print player
 	if (player.HP > 0)
@@ -133,42 +212,6 @@ void printBattleState(MONSTSTAT player, MONSTSTAT opponent, int p, int o) //disp
 	else
 		printf("Your HP: 0 / %d\n\n", (int)ceil(player.maxHP));
 }
-
-void printTrophies(int t[])
-{
-	system("@cls||clear");
-	printf("=============== Trophies ================\n");
-	printf("\n Chomp - Highest difficulty beaten: ");
-	printDifficulty(t[0]);
-	printChomp(false);
-	printf("\n  Ty - Highest difficulty beaten: ");
-	printDifficulty(t[1]);
-	printTy(false);
-	printf("\n Jared - Highest difficulty beaten: ");
-	printDifficulty(t[2]);
-	printJared(false);
-	printf("\nPorkchop - Highest difficulty beaten: ");
-	printDifficulty(t[3]);
-	printPorkchop(false);
-	printf("\n\nPress any key to go back: ");
-	char c;
-	c = _getch(); //Waits for a single keypress from the user, then goes back to main()
-	soundEffect(L"menuSelection.wav");
-	system("@cls||clear");
-}
-
-void printDifficulty(int i) //Only used by printTrophies function
-{
-	if (i == 0)
-		printf("None");
-	else if (i == 1)
-		printf("Easy");
-	else if (i == 2)
-		printf("Normal");
-	else
-		printf("Hard");
-}
-
 void printBattleIntro()
 { //Countdown to add tension
 	printf("\nBattle starting in ");
@@ -178,7 +221,6 @@ void printBattleIntro()
 		delay(DELAY_TIME);
 	}
 }
-
 void delayBetweenTurns()
 {
 	for (int i = 0; i < 5; i++)
@@ -187,22 +229,13 @@ void delayBetweenTurns()
 		printf(".");
 	}
 }
-
 void printBattleEnd(bool playerWon)
 {
 	if (playerWon)
 	{
 		soundEffect(L"winningFanfare.wav");
-		printf("\n\nBattle over. You won!\n");
-		int r = rand() % 10;
-		if (r == 0)
-			printf("\nCheat code unlocked: 39772");
-		else if (r == 1)
-			printf("\nCheat code unlocked: 82650");
-		else if (r == 2)
-			printf("\nCheat code unlocked : 21567");
-		else if (r == 3)
-			printf("\nCheat code unlocked: 91659");
+		printf("\n\nBattle over. You won!");
+		printf("\n\nCheat code unlocked: 39772");
 		printf("\n\nPress any key to continue: ");
 		char c;
 		c = _getch();
@@ -217,6 +250,21 @@ void printBattleEnd(bool playerWon)
 		c = _getch();
 		soundEffect(L"menuSelection.wav");
 	}
+}
+void printHelpScreen(void)
+{
+	system("@cls||clear");
+	printf("=============== Help Menu ================\n");
+	printf("\nAttack  - Deals a small amount of damage to your opponent.");
+	printf("\nDefend  - For the rest of the battle, you will take slightly less damage.");
+	printf("\nSpecial - Either deals a large amount of damage to your opponent, or a small amount to yourself.");
+	printf("\n          It's risky, but it might be necessary to win.");
+	printf("\nForfeit - Give up the battle. Your opponent wins.");
+	printf("\n\nPress any key to go back: ");
+	char c;
+	c = _getch(); //Waits for a single keypress from the user, then goes back to main()
+	soundEffect(L"menuSelection.wav");
+	system("@cls||clear");
 }
 
 void soundEffect(const wchar_t* pszSound) {

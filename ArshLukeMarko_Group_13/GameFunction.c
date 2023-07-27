@@ -27,12 +27,13 @@ bool battleStart(MONSTSTAT player, MONSTSTAT opponent, int p, int o, double d)
 	//Start
 	int moveChoice;
 	double damage;
-	srand(time(NULL));
+	bool skipEnemyTurn;
 	while (player.HP > 0 && opponent.HP > 0) //Battle starts
 	{
 		printBattleState(player, opponent, p, o); //print battle state
+		skipEnemyTurn = false;
 		//Player's turn ---------------------------------------
-		printf("Select a move :\n1. Attack\n2. Defend\n3. Special\n4. Forfeit\n"); //print move options
+		printf("Select a move :\n1. Attack\n2. Defend\n3. Special\n4. Forfeit\n5. Help\n"); //print move options
 		if (scanf("%d", &moveChoice))
 		{
 			switch (moveChoice) //move choice logic
@@ -66,15 +67,24 @@ bool battleStart(MONSTSTAT player, MONSTSTAT opponent, int p, int o, double d)
 					soundEffect(L"backfire.wav");
 					printf("It backfired! You dealt %.1lf damage to yourself!\n", -damage);
 				}
-					
 				break;
 			case 4: //Forfeit
 				player.HP = 0;
 				break;
+			case 5: //Help
+				soundEffect(L"menuSelection.wav");
+				printHelpScreen();
+				skipEnemyTurn = true;
+				break;
+			default:
+				printf("\nInvalid input. Please enter a number from 1 to 5.");
+				delayBetweenTurns();
+				skipEnemyTurn = true;
+				break;
 			}
 		}
 		//Enemy's turn ----------------------------------------
-		if (player.HP > 0 && opponent.HP > 0)
+		if (player.HP > 0 && opponent.HP > 0 && skipEnemyTurn == false)
 		{
 			printf("\nOpponent's turn");
 			delayBetweenTurns(); //Waits a few seconds before clearing screen for opponent's turn

@@ -7,8 +7,8 @@
 #include <time.h>
 #include <math.h>
 #define DEFENCE_MULTIPLIER 0.85
-#define NUMBER_OF_OPPONENTS 4
-#define MONSTER_COUNT 8
+#define NUMBER_OF_OPPONENTS 5
+#define MONSTER_COUNT 9
 #define DELAY_TIME 500
 
 typedef struct monstStat {
