@@ -257,6 +257,7 @@ void printHelpScreen(void)
 	printf("=============== Help Menu ================\n");
 	printf("\nAttack  - Deals a small amount of damage to your opponent.");
 	printf("\nDefend  - For the rest of the battle, you will take slightly less damage.");
+	printf("\n          Becomes less effective each time you use it.");
 	printf("\nSpecial - Either deals a large amount of damage to your opponent, or a small amount to yourself.");
 	printf("\n          It's risky, but it might be necessary to win.");
 	printf("\nForfeit - Give up the battle. Your opponent wins.");

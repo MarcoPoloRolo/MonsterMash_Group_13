@@ -33,7 +33,7 @@ bool battleStart(MONSTSTAT player, MONSTSTAT opponent, int p, int o, double d)
 		printBattleState(player, opponent, p, o); //print battle state
 		skipEnemyTurn = false;
 		//Player's turn ---------------------------------------
-		printf("Select a move :\n1. Attack\n2. Defend\n3. Special\n4. Forfeit\n5. Help\n"); //print move options
+		printf("Select a move :\n1. Attack\n2. Defend\n3. Special\n4. Forfeit\n\n5. Help (Doesn't cost a turn)\n"); //print move options
 		if (scanf("%d", &moveChoice))
 		{
 			switch (moveChoice) //move choice logic
