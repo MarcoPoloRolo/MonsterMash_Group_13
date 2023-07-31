@@ -127,11 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Display.c" />
     <ClCompile Include="GameFunction.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="Utility.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Display.h" />
     <ClInclude Include="GameFunction.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
