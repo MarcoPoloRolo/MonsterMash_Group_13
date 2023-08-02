@@ -15,21 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.c">
+    <ClCompile Include="Display.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utility.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameFunction.c">
+    <ClCompile Include="Interface.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameFunction.h">
+    <ClInclude Include="Display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Utility.h">
+    <ClInclude Include="Interface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
