@@ -7,6 +7,9 @@
 
 int main(int argc, char* argv[])
 {
+	//Resetting the randomness
+	srand(time(NULL));
+
 	bool bossMode = false;
 	if (argc > 1 && strcmp(argv[1], "39772") == 0)
 		bossMode = true; //If code is entered, user has access to a secret boss
@@ -49,6 +52,7 @@ int main(int argc, char* argv[])
 				opponentMonster = 4;
 			else
 				opponentMonster = rand() % 4;
+
 			printBattleIntro();
 			printBattleState(monsters[monsterChoice], monsters[opponentMonster + 4], monsterChoice, opponentMonster + 4); //print battle state
 			if (bossMode)
