@@ -17,9 +17,9 @@ int main(int argc, char* argv[])
 	for (int i = 0; i < NUMBER_OF_OPPONENTS; i++)
 		fscanf_s(fp1, "%d\n", &trophies[i]);
 	fclose(fp1);
-
+	
 	//Creates array for monsters
-	MONSTSTAT monsters[MONSTER_COUNT] = { 0 };
+	MONSTSTAT monsters[MONSTER_COUNT] = { 0 }; 	
 
 	//Start game loop
 	int difficulty = 2; //Default is normal mode

@@ -130,8 +130,8 @@
   <ItemGroup>
     <ClCompile Include="Display.c" />
     <ClCompile Include="GameFunction.c" />
-    <ClCompile Include="Interface.c" />
     <ClCompile Include="Main.c" />
+    <ClCompile Include="Interface.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Display.h" />

@@ -217,7 +217,7 @@ void printBattleIntro()
 	printf("\nBattle starting in ");
 	for (int i = 3; i > 0; i--)
 	{
-		printf("%d, ", i);
+		printf("%d, ", i);	
 		delay(DELAY_TIME);
 	}
 }

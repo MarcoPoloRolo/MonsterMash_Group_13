@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Display.c">
+    <ClCompile Include="Main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Interface.c">
@@ -24,18 +24,18 @@
     <ClCompile Include="GameFunction.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.c">
+    <ClCompile Include="Display.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Display.h">
+    <ClInclude Include="GameFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Interface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameFunction.h">
+    <ClInclude Include="Display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

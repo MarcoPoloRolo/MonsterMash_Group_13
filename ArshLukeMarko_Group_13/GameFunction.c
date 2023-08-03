@@ -3,7 +3,7 @@
 
 double attackDamage(MONSTSTAT attacker, MONSTSTAT defender)
 {
-	return((attacker.attack * defender.defence) + rand() % 10);
+	return((attacker.attack * defender.defence) + rand()%10);
 }
 double specialDamage(MONSTSTAT attacker, MONSTSTAT defender)
 {
@@ -57,7 +57,7 @@ bool battleStart(MONSTSTAT player, MONSTSTAT opponent, int p, int o, double d)
 					opponent.HP = opponent.HP - damage;
 				else
 					player.HP = player.HP + damage; //positive because damage is already negative in this case.
-
+					
 				printBattleState(player, opponent, p, o);
 				if (damage > 0) {
 					soundEffect(L"critical.wav");
